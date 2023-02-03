@@ -1,0 +1,44 @@
+<div [ngClass]="{'container' : showAddProductDialog || showEditProductDialog}">
+  <p-dialog header="{{ showAddProductDialog ? 'Add Product' : 'Edit Product' }}" [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '30vw'}"
+    [draggable]="false" [(visible)]="showAddProductDialog || showEditProductDialog" (onHide)="closeDialog()">
+    <div class="grid mt-3" [formGroup]="productForm">
+      <div class="field col-12">
+        <span class="p-float-label">
+          <input type="text" id="inputProduct" pInputText class="w-full" formControlName="title">
+          <label for="inputProduct">{{'Product Name'}}</label>
+        </span>
+      </div>
+      <div class="field col-12">
+        <span class="p-float-label">
+          <input type="text" id="inputPrice" pInputText class="w-full" formControlName="price">
+          <label for="inputPrice">{{'Price'}}</label>
+        </span>
+      </div>
+      <div class="field col-12">
+        <span class="p-float-label">
+          <p-dropdown inputId="inputCategory" [autoDisplayFirst]="false" [options]="categories" optionLabel="name" optionValue="value" formControlName="category">
+          </p-dropdown>
+          <label for="inputCategory">Category</label>
+        </span>
+      </div>
+      <div class="field col-12">
+        <span class="p-float-label">
+          <textarea style="resize: none;" id="inputDescription" pInputText class="w-full" formControlName="description"></textarea>
+          <label for="inputDescription">{{'Description'}}</label>
+        </span>
+      </div>
+      <div class="field col-12">
+        <span class="p-float-label">
+          <input id="inputImage" pInputText class="w-full" formControlName="image">
+          <label for="inputImage">{{'Image Url'}}</label>
+        </span>
+      </div>
+
+    </div>
+    <ng-template pTemplate="footer">
+      <button *ngIf="showAddProductDialog" pButton label="Submit" (click)="addProduct()" class="p-button-primary"></button>
+      <button *ngIf="showEditProductDialog" pButton label="Submit" (click)="editProduct()" class="p-button-primary"></button>
+      <button pButton (click)="closeDialog()" label="Cancel" class="p-button-danger"></button>
+    </ng-template>
+  </p-dialog>
+</div>
